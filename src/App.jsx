@@ -7,11 +7,11 @@ import { InventoryManagement } from './pages/InventoryManagement'
 import { Login } from './pages/Login'
 import { Route, Routes } from 'react-router-dom'
 import { Signup } from './pages/Signup'
+import "./App.css"
 
 function App() {
   return (
-    <div>
-      <h1 className='app-label'>Firebase Auth & context</h1>
+    <div className='app-space'>
          <Routes>
             <Route path='/' element={<LandingPage />} />
             <Route path='/sign' element={<Signup />} />

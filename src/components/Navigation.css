@@ -1,0 +1,42 @@
+
+.Header {
+    display: flex;
+    justify-content: space-between;
+    width: max-parent;
+    max-width: 1440px;
+  }
+  
+  .logo-container {
+    display: flex;
+  width: 273.318px;
+  height: 64px;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  }
+  
+  .logo {
+    display: flex;
+    justify-content: flex-start;
+    width: 256px;
+    align-items: center;
+  }
+  
+  .nav {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .nav-items  {
+    list-style: none;
+    display: flex;
+  width: 247px;
+  height: 25px;
+  padding: 0px 1px;
+  justify-content: center;
+  align-items: center;
+  gap: 49px;
+  flex-shrink: 0;
+  }
