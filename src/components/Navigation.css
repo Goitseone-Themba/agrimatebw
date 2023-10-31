@@ -40,3 +40,20 @@
   gap: 49px;
   flex-shrink: 0;
   }
+
+/* Add this CSS to create a hover effect with an underline */
+.nav-items li a {
+  text-decoration: none;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.nav-items li a:hover::after {
+  content: '';
+  position: absolute;
+  bottom: -5px; /* Adjust this value to control the underline position */
+  left: 0;
+  width: 100%;
+  height: 2px; /* Adjust this value to control the underline thickness */
+  background-color: #007bff; /* Set the color of the underline */
+}

@@ -16,7 +16,7 @@ export const Navigation = () => {
                     <li><Link to='/dashboard' >Dashboard</Link></li>
                     <li><Link to='/inventoryManagement'>Inventory</Link></li>
                     <li><Link to='/animalTracking'>Animal Tracking</Link></li>
-                    <li><Link to='cropMonitoring'>Crop Monitoring</Link></li>
+                    <li><Link to=' cropMonitoring'>Crop Monitoring</Link></li>
                 </ul>
             </div>
 
