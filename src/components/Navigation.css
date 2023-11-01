@@ -16,6 +16,7 @@
   }
   
   .logo {
+    cursor: pointer;
     display: flex;
     justify-content: flex-start;
     width: 256px;

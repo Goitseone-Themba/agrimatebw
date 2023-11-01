@@ -3,6 +3,7 @@ import logo from "../assets/logo.svg"
 import "./CSS/LandingPage.css"
 import { Link } from 'react-router-dom'
 import { Signup } from './Signup'
+import { Footer } from '../components/Footer'
 
 export const LandingPage = () => {
 
@@ -26,6 +27,6 @@ export const LandingPage = () => {
         <Link to='/sign'><button className='btn-signup'>Signup</button></Link>
       </div>
     </div>
-
+    <Footer />
   </>)
 }

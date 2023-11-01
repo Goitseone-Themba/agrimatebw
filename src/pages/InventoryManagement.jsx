@@ -2,7 +2,9 @@ import React from 'react'
 
 export const InventoryManagement = () => {
   return (
-    <div>InventoryManagement</div>
+    <div>
+      <h1>Inventory</h1>
+    </div>
   )
 }
 

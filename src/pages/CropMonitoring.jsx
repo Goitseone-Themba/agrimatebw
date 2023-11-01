@@ -1,7 +1,9 @@
-import React from 'react'
+
 
 export const CropMonitoring = () => {
   return (
-    <div>CropMonitoring</div>
+    <div>
+      <h1>Crop Monitoring</h1>
+    </div>
   )
 }

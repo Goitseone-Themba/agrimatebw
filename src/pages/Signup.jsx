@@ -10,13 +10,13 @@ export const Signup = () => {
 
         <Stack spacing={2}>
         <Stack spacing={2}>
-          <TextField label='Email' />
-          <TextField label='Password' />
+          <TextField label='Email' type='email'/>
+          <TextField label='Password' type='password'/>
         </Stack>
 
         <Stack spacing={2} direction='row-reverse'>
-          <Button variant='contained' style={{ background: 'black' }}>Next</Button>
-          <Button variant='text' style={{ color: 'black' }} >Cancel</Button>
+          <Button variant='contained' href='/appRouter' style={{ background: 'black' }}>Next</Button>
+          <Button variant='text' href='/' style={{ color: 'black' }} >Cancel</Button>
         </Stack>
       </Stack>        
     </div>

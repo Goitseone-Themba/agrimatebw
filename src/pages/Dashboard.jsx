@@ -4,9 +4,7 @@ import { Footer } from '../components/Footer'
 
 export const Dashboard = () => {
   return (<>
-  <div>Dashboard</div>
-    <Navigation />
-    <Footer />
+  <h1>Dashboard</h1>
   </>    
   )
 }
