@@ -4,8 +4,11 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  color:  #000;
+  background-color: #E2ECFF;
 }
 
-.app-label  {
-
+.app-space  {
+  color: #000;
+  background: #E2ECFF;
 }

@@ -2,6 +2,8 @@ import React, {useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.svg'
 import './Navigation.css'
+import { Button, Typography } from '@mui/material';
+import { UserAuth } from '../context/AuthContext';
 
 export const Navigation = () => {
     const navigate = useNavigate();
@@ -12,8 +14,22 @@ export const Navigation = () => {
     };
     
     const location = useLocation();
-
     console.log(location.pathname)
+
+    const { user, logout }  = UserAuth();
+    
+    //Logout event handling
+    const handleLogout = async () =>    {
+        try {
+            await logout();
+            navigate('/');
+            console.log('You are logged out')
+        }   catch (e)   {
+            console.log(e.message)
+        }
+    };
+
+
     return  (
     <>
         
@@ -32,7 +48,9 @@ export const Navigation = () => {
             </div>
 
             <div className='button-container'>
-
+                <img alt='proPic'/>
+                <Typography>User: </Typography>
+                <Button variant='contained' style={{ background: '' }} onClick={handleLogout}>Logout</Button>
             </div>
         </div>
     </>)

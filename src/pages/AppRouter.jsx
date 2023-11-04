@@ -5,16 +5,19 @@ import { AnimalTracking } from "./AnimalTracking"
 import { CropMonitoring } from "./CropMonitoring"
 import { Navigation } from "../components/Navigation"
 import { Footer } from "../components/Footer"
+import SideNav from '../components/SideNav'
+import './CSS/AppRouter.css'
 
 export const AppRouter = () => {
-  return (<>
-    <Navigation />
+  return (<div className='app-router'>
+    {/* <Navigation /> */}
+    <SideNav />
          <Routes>
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/inventoryManagement' element={<InventoryManagement />} />
             <Route path='/animalTracking' element={<AnimalTracking />} />
             <Route path='/cropMonitoring' element={<CropMonitoring />} />
          </Routes>
-         <Footer />
-  </>)
+    {/* <Footer /> */}
+  </div>)
 }
