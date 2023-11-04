@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Tab } from '@mui/material';
-import { TabContext, TabList, TabPanel } from '@mui/material';
+import { Box, Tab } from '@mui/lab';
+import { TabContext, TabList, TabPanel } from '@mui/lab';
 
 export const InventoryManagement = () => {
   const [value, setValue] = useState('1');
