@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Divider from "@mui/material/Divider";
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,59 +8,43 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { Typography } from '@mui/material'
+import { useState, useEffect } from 'react';
 
-const columns = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
-  {
-    id: 'population',
-    label: 'Population',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'size',
-    label: 'Size\u00a0(km\u00b2)',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'density',
-    label: 'Density',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toFixed(2),
-  },
-];
-
-function createData(name, code, population, size) {
-  const density = population / size;
-  return { name, code, population, size, density };
-}
-
-const rows = [
-  createData('India', 'IN', 1324171354, 3287263),
-  createData('China', 'CN', 1403500365, 9596961),
-  createData('Italy', 'IT', 60483973, 301340),
-  createData('United States', 'US', 327167434, 9833520),
-  createData('Canada', 'CA', 37602103, 9984670),
-  createData('Australia', 'AU', 25475400, 7692024),
-  createData('Germany', 'DE', 83019200, 357578),
-  createData('Ireland', 'IE', 4857000, 70273),
-  createData('Mexico', 'MX', 126577691, 1972550),
-  createData('Japan', 'JP', 126317000, 377973),
-  createData('France', 'FR', 67022000, 640679),
-  createData('United Kingdom', 'GB', 67545757, 242495),
-  createData('Russia', 'RU', 146793744, 17098246),
-  createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Brazil', 'BR', 210147125, 8515767),
-];
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import { db } from "../../firebase";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Swal from "sweetalert2";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 
 export default function CropList() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    //table pages and number of rows per page
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rows, setRows] = useState([]);
+  const empCollectionRef = collection(db, "currentCrops");
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const getUsers = async () => {
+    const data = await getDocs(empCollectionRef);
+    setRows(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -70,21 +55,103 @@ export default function CropList() {
     setPage(0);
   };
 
+  const filterData = async (v) => {
+    if (v) {
+      // Filter the data based on v
+      const filteredData = rows.filter((row) => row.cropType === v.cropType);
+      setRows(filteredData);
+    } else {
+      // If no filter, get all the users from Firebase
+      await getUsers();
+    }
+  };
+  
+
+  const deleteUser = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.value) {
+        deleteApi(id);
+      }
+    });
+  }
+
+  const deleteApi = async (id) => {
+    const userDoc = doc(db, "currentCrops", id);
+    await deleteDoc(userDoc);
+    Swal.fire("Deleted!", "Your file has been deleted.", "success");
+    getUsers();
+  };
+
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+        <Typography
+            gutterBottom
+            variant="h5"
+            component="div"
+            sx={{ padding: "20px" }}
+          >
+            Crops
+          </Typography>
+          <Divider />
+          <Box height={10} />
+          <Stack direction="row" spacing={2} className="my-2 mb-2">
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={rows}
+              sx={{ width: 300 }}
+              onChange={(e, v) => filterData(v)}
+              getOptionLabel={(rows) => rows.cropType || ""}
+              renderInput={(params) => (
+                <TextField {...params} size="small" label="Search CropTypes" />
+              )}
+            />
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1 }}
+            ></Typography>
+            <Button variant="contained" endIcon={<AddCircleIcon />}>
+              Add
+            </Button>
+          </Stack>
+          <Box height={10} />
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
                 <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  align={'left'}
+                  style={{ minWidth: "100px" }}
                 >
-                  {column.label}
+                    Name
                 </TableCell>
-              ))}
+                <TableCell
+                  align={'left'}
+                  style={{ minWidth: "100px" }}
+                >
+                    CropType
+                </TableCell>
+                <TableCell
+                  align={'left'}
+                  style={{ minWidth: "100px" }}
+                >
+                    DatePlanted
+                </TableCell>
+                <TableCell
+                  align={'left'}
+                  style={{ minWidth: "100px" }}
+                >
+                    Area(ha)
+                </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -92,17 +159,42 @@ export default function CropList() {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
+                  <TableRow hover role="checkbox" tabIndex={-1} >
+                        <TableCell key={row.id} align='left'>
+                            {row.name}
                         </TableCell>
-                      );
-                    })}
+                        <TableCell key={row.id} align='left'>
+                            {row.cropType}
+                        </TableCell>
+                        <TableCell key={row.id} align='left'>
+                        {row.datePlanted ? new Date(row.datePlanted.toDate()).toLocaleDateString() : 'N/A'}
+                        </TableCell>
+                        <TableCell key={row.id} align='left'>
+                            {row.area}
+                        </TableCell>
+                        <TableCell align="left">
+                          <Stack spacing={2} direction="row">
+                            <EditIcon
+                              style={{
+                                fontSize: "20px",
+                                color: "#000",
+                                cursor: "pointer",
+                              }}
+                              className="cursor-pointer"
+                              // onClick={() => editUser(row.id)}
+                            />
+                            <DeleteIcon
+                              style={{
+                                fontSize: "20px",
+                                color: "black",
+                                cursor: "pointer",
+                              }}
+                              onClick={() => {
+                                deleteUser(row.id);
+                              }}
+                            />
+                          </Stack>
+                        </TableCell>
                   </TableRow>
                 );
               })}
@@ -110,7 +202,7 @@ export default function CropList() {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
+        rowsPerPageOptions={[5, 10, 25, 100]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}
