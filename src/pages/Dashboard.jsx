@@ -10,6 +10,7 @@ export const Dashboard = () => {
   <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
         <Grid item xs={8}>
+          
 
 
           <h1>Inventory summary</h1>
