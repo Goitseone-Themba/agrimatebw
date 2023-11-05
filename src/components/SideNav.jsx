@@ -124,10 +124,10 @@ export default function SideNav() {
           >
             <MenuIcon />
           </IconButton>
-
           <Typography variant="h5" noWrap component="div">
             Agrimate
           </Typography>
+          
         </Toolbar>
       </AppBar >
       <Drawer variant="permanent" open={open} style={{background: '#E2ECFF', color: 'black'}}>

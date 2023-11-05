@@ -29,6 +29,20 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import Modal from '@mui/material/Modal';
+import { AddCrop } from './AddCrop';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 export default function CropList() {
     //table pages and number of rows per page
@@ -36,6 +50,9 @@ export default function CropList() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [rows, setRows] = useState([]);
   const empCollectionRef = collection(db, "currentCrops");
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     getUsers();
@@ -91,6 +108,19 @@ export default function CropList() {
   };
 
   return (
+    <>
+    <div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <AddCrop closeEvent={handleClose}/>
+        </Box>
+      </Modal>
+    </div>
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
         <Typography
             gutterBottom
@@ -102,7 +132,7 @@ export default function CropList() {
           </Typography>
           <Divider />
           <Box height={10} />
-          <Stack direction="row" spacing={2} className="my-2 mb-2">
+          <Stack direction="row" spacing={2} className="my-2 mb-2" sx={{ padding: "16px" }} >
             <Autocomplete
               disablePortal
               id="combo-box-demo"
@@ -119,8 +149,9 @@ export default function CropList() {
               component="div"
               sx={{ flexGrow: 1 }}
             ></Typography>
-            <Button variant="contained" endIcon={<AddCircleIcon />}>
-              Add
+            <Button variant="contained" onClick={handleOpen} startIcon={<AddCircleIcon />} style={{ background: '#000' }} sx={{
+    borderRadius: "24px", width: '150px'}}>
+              Add New
             </Button>
           </Stack>
           <Box height={10} />
@@ -151,6 +182,12 @@ export default function CropList() {
                   style={{ minWidth: "100px" }}
                 >
                     Area(ha)
+                </TableCell>
+                <TableCell
+                  align={'left'}
+                  style={{ minWidth: "100px" }}
+                >
+                    Action
                 </TableCell>
             </TableRow>
           </TableHead>
@@ -211,5 +248,6 @@ export default function CropList() {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
+    </>
   );
 }
