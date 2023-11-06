@@ -26,7 +26,7 @@ export const InventoryManagement = () => {
               variant="scrollable"
               scrollButtons="auto"
             >
-              
+              <Tab label="Overview" value="0" />
               <Tab label="Equipments" value="1" />
               <Tab label="Fuel" value="2" />
               <Tab label="Fertilisers" value="3" />
@@ -36,6 +36,7 @@ export const InventoryManagement = () => {
               <Tab label="Vaccines" value="7" />
             </TabList>
           </Box>
+          <TabPanel value="0">Overview</TabPanel>
           <TabPanel value="1">
             <div>
               <table>

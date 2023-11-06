@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Button, Stack, TextField, Typography, InputAdornment } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
-import DatePicker from "@mui/lab/DatePicker";
 import { db } from "../../firebase";
 import {
   collection,
@@ -25,8 +24,8 @@ export const AddCrop = ({ closeEvent }) => {
 
   const empCollectionRef = collection(db, "currentCrops");
   const [name, setName] = useState("");
-  const [cropType, setCropType] = useState(null);
-  const [datePlanted, setDatePlanted] = useState(null);
+  const [cropType, setCropType] = useState("");
+  const [datePlanted, setDatePlanted] = useState("");
   const [area, setArea] = useState("");
   const [rows, setRows] = useState([]);
 
@@ -78,11 +77,11 @@ export const AddCrop = ({ closeEvent }) => {
           />
 
 
-        <DatePicker
+        <TextField
           label="Date Planted"
+          type="text"
           value={datePlanted}
-          onChange={(newValue) => setDatePlanted(newValue)}
-          renderInput={(params) => <TextField {...params} />}
+          onChange={(e) => setDatePlanted(e.target.value)}
         />
 
         <TextField

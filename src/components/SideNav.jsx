@@ -124,6 +124,8 @@ export default function SideNav() {
           >
             <MenuIcon />
           </IconButton>
+
+          
           <Typography variant="h5" noWrap component="div">
             Agrimate
           </Typography>
