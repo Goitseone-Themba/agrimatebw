@@ -18,10 +18,15 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import InventoryIcon from '@mui/icons-material/Inventory';
 import YardIcon from '@mui/icons-material/Yard';
 import PetsIcon from '@mui/icons-material/Pets';
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
+import logo2 from '../assets/logo2.svg';
+import auth from '../firebase'
+import { MenuItem } from '@mui/base';
+// import{useState} from 'react'
 
 const drawerWidth = 240;
 
@@ -90,6 +95,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
+// const {uid, photoURL} = auth.currentUser;
+
 export default function SideNav() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -126,10 +133,19 @@ export default function SideNav() {
           </IconButton>
 
           
-          <Typography variant="h5" noWrap component="div">
-            Agrimate
-          </Typography>
-          
+          <Typography variant="h5" noWrap component="div" sx={{ display: 'flex', alignItems: 'center' }}>
+  <span style={{ flexGrow: 1 }}></span> {/* This creates a flexible space to push the logo to the right */}
+  <img src={logo2} alt="logo" style={{ width: '40px', height: '40px', marginRight: '10px' }} />
+  Agrimate
+</Typography>
+
+<div style={{ flexGrow: 1}} /> 
+<NotificationsNoneIcon style={{ marginRight: '100px' }} /> {/* Add margin to create space */}
+<img src={logo2} alt="logo" style={{ width: '40px', height: '40px', marginRight: '100px'  }}  />
+ {/* <Menu id='profile-menu'>  */}
+{/* <MenuItem>UserProfile</MenuItem>  */}
+  {/* <MenuItem>LogOut</MenuItem>  */}
+{/* </Menu> */}
         </Toolbar>
       </AppBar >
       <Drawer variant="permanent" open={open} style={{background: '#E2ECFF', color: 'black'}}>
@@ -197,6 +213,13 @@ export default function SideNav() {
       </Drawer>
       {/* <Box component="main" sx={{ flexGrow: 1, p: 3 }} style={{background: '#E2ECFF', color: 'black'}}>
         <DrawerHeader />
+
+
+
+      </Box> */}
+    </Box>
+  );
+} 
 
 
 
