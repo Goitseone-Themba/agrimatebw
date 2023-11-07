@@ -7,6 +7,8 @@ import { Navigation } from "../components/Navigation"
 import { Footer } from "../components/Footer"
 import SideNav from '../components/SideNav'
 import './CSS/AppRouter.css'
+import { UserProfile } from './UserProfile'
+import { Settings } from './Settings'
 
 export const AppRouter = () => {
   return (<div className='app-router'>
@@ -17,6 +19,8 @@ export const AppRouter = () => {
             <Route path='/inventoryManagement' element={<InventoryManagement />} />
             <Route path='/animalTracking' element={<AnimalTracking />} />
             <Route path='/cropMonitoring' element={<CropMonitoring />} />
+            <Route path='/userprofile' element={<UserProfile />} />
+            <Route path='/settings' element={<Settings/>} />  
          </Routes>
     {/* <Footer /> */}
   </div>)
