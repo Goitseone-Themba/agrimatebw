@@ -1,0 +1,41 @@
+/*user page style*/
+.container {
+    margin-bottom: 20px; /* Add margin at the bottom to create space between heading and first container */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CSS styles for the rectangular container */
+.rectangle-container {
+    width: 600px;
+    height: 40px;
+    border: 2px solid #333;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    padding: 0 40px; /* Adjust left and right padding to move items closer to each other */
+}
+
+/* CSS styles for the edit icon */
+.icon-container {
+    display: flex;
+    align-items: center;
+    flex-Grow: 1;
+    margin-top: 50px;
+  }
+  
+
+/* 
+.leave {
+    display: flex;
+    align-items: left;
+    justify-content: space-between;
+    padding-bottom: 60px;                               
+    margin-top: 10px;
+    margin-left: 600px;
+} */
+  
