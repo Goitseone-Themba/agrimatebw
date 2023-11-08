@@ -223,7 +223,3 @@ export default function SideNav() {
 
 
 
-      </Box> */}
-    </Box>
-  );
-} 
