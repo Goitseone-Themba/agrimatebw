@@ -1,0 +1,190 @@
+
+.about {
+    background: E2ECFF;
+    display: flex;
+    justify-content: space-between;
+    width: max-parent;
+    max-width: 1440px;
+  }
+  
+  .logo-container {
+    display: flex;
+  width: 273.318px;
+  height: 64px;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  }
+  
+  .logo {
+    display: flex;
+    justify-content: flex-start;
+    width: 256px;
+    align-items: center;
+  }
+  
+  .nav {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .nav-items  {
+    list-style: none;
+    display: flex;
+  width: 247px;
+  height: 25px;
+  padding: 0px 1px;
+  justify-content: center;
+  align-items: center;
+  gap: 49px;
+  flex-shrink: 0;
+  }
+  .nav-items li {
+    text-decoration: none;
+    position: relative;
+    transition: all 0.2s;
+  }
+  
+  .nav-items li :hover::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; /* Adjust this value to control the underline position */
+    left: 0;
+    width: 100%;
+    height: 2px; /* Adjust this value to control the underline thickness */
+    background-color: #007bff; /* Set the color of the underline */
+  }
+  .button-container {
+    display: flex;
+      width: 284px;
+      height: 64px;
+      align-items: center;
+      gap: 31px;
+      flex-shrink: 0;
+  }
+  
+  .btn-login  {
+    border-radius: 24px;
+    border: none;
+    background: #fff;
+    color: #000;
+    width: 128px;
+    margin-right: 0px;
+  }
+  
+  .btn-signup {
+    color: #fff;
+    border-radius: 24px;
+    border: none;
+    background: #000;
+    width: 128px;
+    margin-left: 0px;
+  }
+
+  .mission{
+   
+   margin-left: 50%;
+    align-items: center;
+    font-size: medium;
+   
+    display: flex;
+  }
+  .stress{
+    margin-left: 20%;
+    align-items: center;
+    font-size: medium;
+   
+    display: flex;
+  }
+  .progress{
+    margin-left: 50%;
+    align-items: center;
+    font-size: medium;
+   
+    display: flex;
+  }
+
+  .check{
+    list-style-type:none ;
+    margin-left: 50%;
+    align-items: center;
+    font-size: medium;
+   
+    display: flex;
+  }
+
+  .values{
+    margin-left: 50%;
+    align-items: center;
+    font-size: medium;
+   
+    display: flex;
+  }
+  .our{
+    flex-direction: column;
+    margin-left: 30%;
+    align-items: center;
+    font-size: medium;
+   
+    display: flex;
+  }
+  .customer{
+
+    margin-left: 50%;
+    align-items: center;
+    font-size: medium;
+   
+    display: flex;
+  }
+  .approach{
+    list-style-type:none ;
+    margin-left: 20%;
+    align-items: center;
+    font-size: medium;
+   
+    display: flex;
+  }
+  .data{
+    margin-left: 50%;
+    align-items: center;
+    font-size: medium;
+   
+    display: flex;
+  }
+  .security{
+    margin-left: 30%;
+    align-items: center;
+    font-size: medium;
+   
+    display: flex;
+  }
+  .future{
+    margin-left: 50%;
+    align-items: center;
+    font-size: medium;
+   
+    display: flex;
+  }
+  .plans{
+    margin-left: 20%;
+    align-items: center;
+    font-size: medium;
+   
+    display: flex;
+  }
+.contact{
+    margin-left: 50%;
+    align-items: center;
+    font-size: medium;
+   
+    display: flex;
+}
+.us{
+    margin-left: 30%;
+    align-items: center;
+    font-size: medium;
+   
+    display: flex;
+}

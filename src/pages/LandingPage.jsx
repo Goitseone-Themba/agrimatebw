@@ -14,14 +14,14 @@ export const LandingPage = () => {
       <div className='logo-container'>
         <img className='logo' src={logo} alt="Agrimate logo" />
       </div>
-      
-      <div className='nav'>
-      <ul className='nav-items'>
-        <li>About</li>
-        <li>FAQ</li>
-        <li>Contacts</li>
+      <div className="nav">
+      <ul className="nav-items">
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+       
       </ul>
-      </div>
+    </div>
 
       <div className='button-container'>
         <Link to='/login'><button className='btn-login'>Login</button></Link>
