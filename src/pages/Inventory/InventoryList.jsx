@@ -47,7 +47,7 @@ const style = {
 export default function InventoryList() {
     //table pages and number of rows per page
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [rows, setRows] = useState([]);
   const empCollectionRef = collection(db, "inventory");
   const [open, setOpen] = useState(false);
@@ -141,7 +141,7 @@ export default function InventoryList() {
               onChange={(e, v) => filterData(v)}
               getOptionLabel={(rows) => rows.cropType || ""}
               renderInput={(params) => (
-                <TextField {...params} size="small" label="Search CropTypes" />
+                <TextField {...params} size="small" label="Search category" />
               )}
             />
             <Typography
@@ -239,7 +239,7 @@ export default function InventoryList() {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 25, 100]}
+        rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}

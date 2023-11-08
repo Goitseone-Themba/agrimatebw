@@ -46,7 +46,7 @@ const style = {
 export const AnimalList = () => {
 
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [rows, setRows] = useState([]);
   const [filteredRows, setFilteredRows] = useState([]); // Separate state for filtered data
   const empCollectionRef = collection(db, "animals");
@@ -236,7 +236,7 @@ export const AnimalList = () => {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 25, 100]}
+        rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}

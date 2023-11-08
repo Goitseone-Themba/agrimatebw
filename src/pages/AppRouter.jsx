@@ -9,7 +9,6 @@ import SideNav from '../components/SideNav'
 import './CSS/AppRouter.css'
 import { Settings } from './Settings'
 import { UserProfile } from './UserProfile'
-import { Settings } from './Settings'
 
 
 export const AppRouter = () => {

@@ -24,15 +24,23 @@ export const CropSummary = () => {
   const [rows, setRows] = useState([]);
   const empCollectionRef = collection(db, "currentCrops");
 
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const getUsers = async () => {
+    const data = await getDocs(empCollectionRef);
+    setRows(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+
 
   const data = [
     ["Crop Type", "Area Planted"],
-    ["Planting", 11],
-    ["Germination", 2],
-    ["Vegetative Growth", 20],
-    ["Flowering", 15],
-    ["Fruiting", 10],
-    ["Harvest", 7],
+    ["Legumes", 11],
+    ["Cereal", 6],
+    ["Vegetables", 20],
+    ["Fruits", 15],
+    ["Unplanted", 10],
   ];
 
   const options = {

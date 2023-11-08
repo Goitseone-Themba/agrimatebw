@@ -66,16 +66,13 @@ export const AddCrop = ({ closeEvent }) => {
 
         <TextField label="Name" type="text" value={name} onChange={handleNameChange} />
 
-        <Autocomplete
-            id="cropType"
-            options={cropTypes}
-            value={cropType}
-            onChange={handleCropTypeChange} // Add this
-            renderInput={(params) => (
-              <TextField {...params} label="Crop Type" variant="outlined" />
-            )}
-          />
-
+        
+        <TextField
+          label="Crop Type"
+          type="text"
+          value={cropType}
+          onChange={(e) => setCropType(e.target.value)}
+        />
 
         <TextField
           label="Date Planted"

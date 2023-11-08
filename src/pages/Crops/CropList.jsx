@@ -47,7 +47,7 @@ const style = {
 export default function CropList() {
     //table pages and number of rows per page
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [rows, setRows] = useState([]);
   const empCollectionRef = collection(db, "currentCrops");
   const [open, setOpen] = useState(false);
@@ -239,7 +239,7 @@ export default function CropList() {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 25, 100]}
+        rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}

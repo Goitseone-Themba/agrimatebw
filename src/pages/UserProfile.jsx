@@ -96,7 +96,7 @@ export const UserProfile = () => {
     />
   </div>
   <div className="leave">
-  <a href="LandingPage" className="leave-link">
+  <a href="/" className="leave-link">
   <ExitToAppIcon />
   </a>
 </div>
