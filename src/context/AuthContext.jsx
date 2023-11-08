@@ -16,6 +16,11 @@ export const AuthContextProvider = ({children}) => {
         return createUserWithEmailAndPassword(auth, email, password);
       };   
 
+      const signInWithGoogle = () => {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        auth.signInWithPopup(provider);
+      };
+
     const logIn = (email, password) =>  {
         return signInWithEmailAndPassword(auth, email, password)
     };
@@ -25,7 +30,7 @@ export const AuthContextProvider = ({children}) => {
     };
 
         return (
-            <UserContext.Provider value={{ createUser, user, logout,logIn }}>
+            <UserContext.Provider value={{ createUser, signInWithGoogle, user, logout, logIn }}>
                 {children}
             </UserContext.Provider>
         );

@@ -4,7 +4,6 @@ import { AnimalList } from './Animals/AnimalList';
 export const AnimalTracking = () => {
   return (
     <div>
-      <h1>Animal Tracking</h1>
       <Box height={70}/>
       <Box sx={{display: 'flex'}}>
       <Box width={30}/>

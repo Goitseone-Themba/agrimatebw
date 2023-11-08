@@ -7,13 +7,15 @@ import "./App.css";
 import { AppRouter } from './pages/AppRouter';
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import { About } from './pages/About';
 
 function App() {
   return (
     <div className='app-space'>
           <AuthContextProvider>
           <Routes>
-          <Route path='/' element={<LandingPage />} />
+            <Route path='/' element={<LandingPage />} />
+            <Route path='/about' element={<About />} />
             <Route path='/sign' element={<Signup />} />
             <Route path='/login' element={<Login />} />
             <Route path='/appRouter/*' element={

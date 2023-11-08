@@ -125,7 +125,7 @@ export const AnimalList = () => {
             component="div"
             sx={{ padding: "20px" }}
           >
-            Crops
+            Animals
           </Typography>
           <Divider />
           <Box height={10} />

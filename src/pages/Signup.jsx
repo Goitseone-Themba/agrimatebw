@@ -11,6 +11,7 @@ export const Signup = () => {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const { createUser } = UserAuth()
+  const { signInWithGoogle } = UserAuth()
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
@@ -18,6 +19,18 @@ export const Signup = () => {
     setError('');
     try{
         await createUser(email, password);
+        navigate('/appRouter/dashboard')
+    } catch (e) {
+      setError(e.message);
+      console.log(e.message);
+    }
+  };
+
+  const handleGoogle = async (e) => {
+    e.preventDefault();
+    setError('');
+    try{
+        await signInWithGoogle;
         navigate('/appRouter/dashboard')
     } catch (e) {
       setError(e.message);
@@ -42,9 +55,9 @@ export const Signup = () => {
           <Button variant='text' href='/' style={{ color: 'black' }} >Cancel</Button>
         </Stack>
           <Typography>or</Typography>
-          <Button variant='contained' style={{background: 'black'}} startIcon={<GoogleIcon />}>ContinueWithGoogle</Button>
+          <Button variant='contained' style={{background: 'black'}} startIcon={<GoogleIcon />} onClick={handleGoogle}>ContinueWithGoogle</Button>
           <Link to='/login'>Already have an account? Login</Link >
       </Stack>      
         </form>
     </div>)
-}
+} 

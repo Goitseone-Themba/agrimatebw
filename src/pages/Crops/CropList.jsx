@@ -204,7 +204,7 @@ export default function CropList() {
                             {row.cropType}
                         </TableCell>
                         <TableCell key={row.id} align='left'>
-                        {row.datePlanted /*? new Date(row.datePlanted.toDate()).toLocaleDateString() : 'N/A'*/}
+                        {row.datePlanted }
                         </TableCell>
                         <TableCell key={row.id} align='left'>
                             {row.area}

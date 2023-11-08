@@ -27,6 +27,30 @@ export const LandingPage = () => {
         <Link to='/sign'><button className='btn-signup'>Signup</button></Link>
       </div>
     </div>
+
+    <h1>Manage your farm from <br/>anywhere in the world</h1><br/>
+    
+    <div style={{ position: 'relative' }}>
+  <img src={tractor} alt="tractor" style={{ width: '100%' }} />
+  <div style={{
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+   color: 'white',
+   fontSize:'30px',
+    padding: '10px',
+    borderRadius: '5px',
+  }}>
+    Farming  made simple,yields made bountiful
+  </div>
+</div><br/>
+
+<div>
+  <h2>What is Agrimate?</h2><br/>
+  <p>Agrimate is a farm management application that helps farmers to understand how well their operations are running and what improvements need to be <br/>made.The application provides  farmers with a central location to store and access their farm data including  tracking their inventory,crops and<br/> animals. The application also provide farmers with a variety  of tools to help them analyze their data and make better decisions about their <br/>operations.</p>
+</div><br/><br/><br/>
+
     <Footer />
   </>)
 }
