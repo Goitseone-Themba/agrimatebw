@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -18,15 +18,14 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import YardIcon from '@mui/icons-material/Yard';
 import PetsIcon from '@mui/icons-material/Pets';
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 import logo2 from '../assets/logo2.svg';
-import auth from '../firebase'
-import { MenuItem } from '@mui/base';
-// import{useState} from 'react'
+import auth from '../firebase';
+import { Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 
 const drawerWidth = 240;
 
@@ -56,7 +55,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'flex-end',
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
 
@@ -95,11 +93,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-// const {uid, photoURL} = auth.currentUser;
-
 export default function SideNav() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [menuAnchorEl, setMenuAnchorEl] = useState(null);
+  const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
@@ -114,10 +112,38 @@ export default function SideNav() {
     navigate(path);
   };
 
+  const handleMenuOpen = (event) => {
+    setMenuAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setMenuAnchorEl(null);
+  };
+
+  const handleUserProfileClick = () => {
+    handleMenuClose(); // Close the menu
+    navigate('/userProfile'); // Navigate to the UserProfile page
+  };
+
+  const handleOpenLogoutDialog = () => {
+    setIsLogoutDialogOpen(true);
+    handleMenuClose(); // Close the menu
+  };
+
+  const handleCloseLogoutDialog = () => {
+    setIsLogoutDialogOpen(false);
+  };
+
+  const handleLogout = () => {
+    // Perform the logout action here
+    auth.signOut(); // For example, signing out using Firebase Authentication
+    navigate('/logout'); // Navigate to the logout page or perform other logout actions
+  };
+
   return (
-    <Box sx={{ display: 'flex' }} style={{background: '#E2ECFF', color: 'black'}}>
+    <Box sx={{ display: 'flex' }} style={{ background: '#E2ECFF', color: 'black' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open} style={{background: '#E2ECFF', color: 'black'}}>
+      <AppBar position="fixed" open={open} style={{ background: '#E2ECFF', color: 'black' }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -132,61 +158,60 @@ export default function SideNav() {
             <MenuIcon />
           </IconButton>
 
-          
           <Typography variant="h5" noWrap component="div" sx={{ display: 'flex', alignItems: 'center' }}>
-  <span style={{ flexGrow: 1 }}></span> {/* This creates a flexible space to push the logo to the right */}
-  <img src={logo2} alt="logo" style={{ width: '40px', height: '40px', marginRight: '10px' }} />
-  Agrimate
-</Typography>
+            <span style={{ flexGrow: 1 }}></span>
+            <div onClick={handleMenuOpen}>
+              <img src={logo2} alt="logo" style={{ width: '40px', height: '40px', marginRight: '10px' }} />
+            </div>
+            Agrimate
+          </Typography>
 
-<div style={{ flexGrow: 1}} /> 
-<NotificationsNoneIcon style={{ marginRight: '100px' }} /> {/* Add margin to create space */}
-<img src={logo2} alt="logo" style={{ width: '40px', height: '40px', marginRight: '100px'  }}  />
- {/* <Menu id='profile-menu'>  */}
-{/* <MenuItem>UserProfile</MenuItem>  */}
-  {/* <MenuItem>LogOut</MenuItem>  */}
-{/* </Menu> */}
+          <div style={{ flexGrow: 1 }} />
+          <NotificationsNoneIcon style={{ marginRight: '100px' }} />
+          <div onClick={handleMenuOpen}>
+            <img src={logo2} alt="logo" style={{ width: '40px', height: '40px', marginRight: '100px' }} />
+          </div>
         </Toolbar>
-      </AppBar >
-      <Drawer variant="permanent" open={open} style={{background: '#E2ECFF', color: 'black'}}>
-        <DrawerHeader style={{background: '#E2ECFF', color: 'black'}}>
+      </AppBar>
+      <Drawer variant="permanent" open={open} style={{ background: '#E2ECFF', color: 'black' }}>
+        <DrawerHeader style={{ background: '#E2ECFF', color: 'black' }}>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List style={{ background: '#E2ECFF', color: 'black' }}>
-            {[
+          {[
             { text: 'Dashboard', icon: <DashboardIcon />, path: '/appRouter/dashboard' },
             { text: 'Inventory Management', icon: <InventoryIcon />, path: '/appRouter/inventoryManagement' },
             { text: 'Animal Tracking', icon: <PetsIcon />, path: '/appRouter/animalTracking' },
             { text: 'Crop Monitoring', icon: <YardIcon />, path: '/appRouter/CropMonitoring' },
-        ].map((item) => (
+          ].map((item) => (
             <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
+              <ListItemButton
                 sx={{
-                minHeight: 48,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
                 }}
                 onClick={() => handleItemClick(item.path)}
-                >
+              >
                 <ListItemIcon
-                sx={{
+                  sx={{
                     minWidth: 0,
                     mr: open ? 3 : 'auto',
                     justifyContent: 'center',
-                }}
+                  }}
                 >
-                {item.icon}
+                  {item.icon}
                 </ListItemIcon>
                 <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
+              </ListItemButton>
             </ListItem>
-            ))}
+          ))}
         </List>
         <Divider />
-        <List style={{background: '#E2ECFF', color: 'black', height: '100%'}}>
+        <List style={{ background: '#E2ECFF', color: 'black', height: '100%' }}>
           {['Settings'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
@@ -203,7 +228,7 @@ export default function SideNav() {
                     justifyContent: 'center',
                   }}
                 >
-                  { <SettingsSuggestIcon />}
+                  {<SettingsSuggestIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
@@ -211,15 +236,35 @@ export default function SideNav() {
           ))}
         </List>
       </Drawer>
-      {/* <Box component="main" sx={{ flexGrow: 1, p: 3 }} style={{background: '#E2ECFF', color: 'black'}}>
-        <DrawerHeader />
+      <Menu
+        id="profile-menu"
+        anchorEl={menuAnchorEl}
+        open={Boolean(menuAnchorEl)}
+        onClose={handleMenuClose}
+      >
+        <MenuItem onClick={handleMenuClose}>
+  <Link to="/AppRouter/userProfile">UserProfile</Link>
+</MenuItem>
+        <MenuItem onClick={handleOpenLogoutDialog}>Logout</MenuItem>
+      </Menu>
 
-
-
-      </Box> */}
+      {/* Logout Confirmation Dialog */}
+      <Dialog open={isLogoutDialogOpen} onClose={handleCloseLogoutDialog}>
+        <DialogTitle>Logout</DialogTitle>
+        <DialogContent>
+          <Typography variant="body1" gutterBottom>
+            Are you sure you want to log out?
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseLogoutDialog} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleLogout} color="primary">
+            Logout
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
-} 
-
-
-
+}
