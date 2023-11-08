@@ -7,6 +7,9 @@ import "./App.css";
 import { AppRouter } from './pages/AppRouter';
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import { About } from './pages/About';
+
+
 
 function App() {
   return (
@@ -16,6 +19,8 @@ function App() {
           <Route path='/' element={<LandingPage />} />
             <Route path='/sign' element={<Signup />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/about' element={<About />} />
+
             <Route path='/appRouter/*' element={
               <ProtectedRoute>
                 <AppRouter />
