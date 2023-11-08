@@ -26,6 +26,7 @@ import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 import logo2 from '../assets/logo2.svg';
 import auth from '../firebase';
 import { Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const drawerWidth = 240;
 
@@ -136,8 +137,10 @@ export default function SideNav() {
 
   const handleLogout = () => {
     // Perform the logout action here
-    auth.signOut(); // For example, signing out using Firebase Authentication
-    navigate('/logout'); // Navigate to the logout page or perform other logout actions
+    auth.signOut().then(() => {
+      // After successful logout, navigate to the landing page
+      navigate('/');
+    });
   };
 
   return (
@@ -167,9 +170,9 @@ export default function SideNav() {
           </Typography>
 
           <div style={{ flexGrow: 1 }} />
-          <NotificationsNoneIcon style={{ marginRight: '100px' }} />
+          
           <div onClick={handleMenuOpen}>
-            <img src={logo2} alt="logo" style={{ width: '40px', height: '40px', marginRight: '100px' }} />
+          <AccountCircleIcon style={{ width: '40px', height: '40px', marginRight: '100px' }} />
           </div>
         </Toolbar>
       </AppBar>
@@ -245,7 +248,8 @@ export default function SideNav() {
         <MenuItem onClick={handleMenuClose}>
   <Link to="/AppRouter/userProfile">UserProfile</Link>
 </MenuItem>
-        <MenuItem onClick={handleOpenLogoutDialog}>Logout</MenuItem>
+<MenuItem onClick={handleOpenLogoutDialog}>Logout</MenuItem>
+
       </Menu>
 
       {/* Logout Confirmation Dialog */}
@@ -261,8 +265,10 @@ export default function SideNav() {
             Cancel
           </Button>
           <Button onClick={handleLogout} color="primary">
-            Logout
-          </Button>
+  <Link to="/">Logout</Link>
+</Button>
+
+
         </DialogActions>
       </Dialog>
     </Box>
