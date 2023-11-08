@@ -7,25 +7,41 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Stack } from '@mui/material';
 import { Chart } from "react-google-charts";
+import { useState, useEffect } from 'react';
+import { db } from "../../firebase";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 
-export const data = [
-  ["Crop Stage", "Days to Complete"],
-  ["Planting", 11],
-  ["Germination", 2],
-  ["Vegetative Growth", 20],
-  ["Flowering", 15],
-  ["Fruiting", 10],
-  ["Harvest", 7],
-];
-
-export const options = {
-  title: "Crop Monitoring",
-  subtitle: "Crop Type, Area Planted",
-  pieHole: 0.4,
-  is3D: false,
-};
 
 export const CropSummary = () => {
+
+  const [rows, setRows] = useState([]);
+  const empCollectionRef = collection(db, "currentCrops");
+
+
+  const data = [
+    ["Crop Type", "Area Planted"],
+    ["Planting", 11],
+    ["Germination", 2],
+    ["Vegetative Growth", 20],
+    ["Flowering", 15],
+    ["Fruiting", 10],
+    ["Harvest", 7],
+  ];
+
+  const options = {
+    title: "Crop Monitoring",
+    subtitle: "Crop Type, Area Planted",
+    pieHole: 0.4,
+    is3D: false,
+  };
+
   return (
     <div>
 
