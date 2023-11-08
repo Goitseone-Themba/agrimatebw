@@ -4,6 +4,7 @@ import "./CSS/LandingPage.css"
 import { Link } from 'react-router-dom'
 import { Signup } from './Signup'
 import { Footer } from '../components/Footer'
+import tractor from '../assets/tractor.png';
 
 export const LandingPage = () => {
 
